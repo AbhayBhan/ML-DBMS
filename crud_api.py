@@ -8,6 +8,7 @@ class dboperation :
 
     def createTable(self, table_data) :
         columns = []
+        table_name = table_data["table_name"];
 
         for col in table_data["cols"]:
             col_name = col["name"]
@@ -17,7 +18,7 @@ class dboperation :
         result_string = ", ".join(columns)
 
         query = f'''
-            CREATE TABLE IF NOT EXISTS books (
+            CREATE TABLE IF NOT EXISTS {table_name} (
                 {result_string}
             )'''
 
@@ -38,6 +39,7 @@ class dboperation :
 
 db = dboperation("books")
 data = {
+    "table_name" : "books",
     "cols" : [{
         "name" : "Book_Name",
         "datatype" : "TEXT"
