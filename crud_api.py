@@ -6,6 +6,10 @@ class dboperation :
         self.conn = sqlite3.connect(name+".db")
         self.cursor = self.conn.cursor()
 
+    def table_exists(self, table_name) :
+        self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?", (table_name,))
+        return self.cursor.fetchone() is not None
+
     def createTable(self, table_data) :
         columns = []
         table_name = table_data["table_name"];
@@ -27,6 +31,12 @@ class dboperation :
         print("Created Table")
 
         self.conn.commit()
+
+    def addData(self, table_name, data) :
+        if(self.table_exists(table_name=table_name)) :
+            print("The Table Exists")
+        else :
+            print("The Table Doesn't Exists")
             
 
     def print(self) :
@@ -52,7 +62,8 @@ data = {
     }]
 }
 
-db.createTable(data);
+db.createTable(data)
 print(db.print())
+db.addData(table_name="books",data=data)
 
 db.close()
