@@ -32,15 +32,19 @@ class dboperation :
 
         self.conn.commit()
 
-    def addData(self, table_name, data) :
-        if(self.table_exists(table_name=table_name)) :
-            print("The Table Exists")
-        else :
-            print("The Table Doesn't Exists")
+    def addData(self, table_name, data):
+        if self.table_exists(table_name=table_name):
+            placeholders = ','.join(['?'] * len(data))
+            query = f'INSERT INTO {table_name} VALUES ({placeholders})'
+            self.cursor.execute(query, data)
+            self.conn.commit()
+            print("Data added successfully")
+        else:
+            print("The Table Doesn't Exist")
             
 
-    def print(self) :
-        self.cursor.execute(f'SELECT * FROM {self.database_name}')
+    def fetchAll(self, table_name) :
+        self.cursor.execute(f'SELECT * FROM {table_name}')
         return self.cursor.fetchall()
     
     def close(self) :
@@ -63,7 +67,7 @@ data = {
 }
 
 db.createTable(data)
-print(db.print())
-db.addData(table_name="books",data=data)
+print(db.fetchAll("books"))
+# db.addData(table_name="books",data=['To Kill a Mockingbird', 'Abc', 5])
 
 db.close()
