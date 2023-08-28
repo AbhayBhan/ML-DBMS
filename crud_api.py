@@ -1,4 +1,5 @@
 import sqlite3
+import os
 
 class dboperation :
     def __init__(self,name) :
@@ -78,6 +79,19 @@ class dboperation :
                 print("Operation Aborted.")
         else : 
             print("The Table Doesn't Exist")
+
+    def dropDatabase(self) : 
+        self.close()
+        dbname = self.database_name+".db"
+        if os.path.exists(dbname) : 
+            conf = input("Do you really want to drop this database? (Y/N) : ")
+            if conf == "Y" :
+                os.remove(dbname)
+                print("Dropped Database.")
+            else : 
+                print("Dropping Aborted.")
+        else : 
+            print("Unable to perform deletion.")
     
     def close(self) :
         self.conn.close()
@@ -98,9 +112,10 @@ data = {
     }]
 }
 
-db.createTable(data)
+# db.createTable(data)
 # print(db.fetchAll("books"))
-db.addData(table_name="books",data=['To Kill a Mockingbird', 'Abc', 12])
-print(db.fetchWhere(table_name="books", data="Book_Name == 'To Kill a Mockingbird'"))
+# db.addData(table_name="books",data=['To Kill a Mockingbird', 'Abc', 12])
+# print(db.fetchWhere(table_name="books", data="Book_Name == 'To Kill a Mockingbird'"))
 # print(db.getColumns(table_name="books"))
-db.close()
+# db.close()
+db.dropDatabase()
