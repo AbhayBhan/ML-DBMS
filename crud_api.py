@@ -66,6 +66,18 @@ class dboperation :
                 return self.cursor.fetchall()
         else : 
             print("The Table Doesn't Exist")
+
+    def deleteTable(self, table_name) : 
+        if self.table_exists(table_name=table_name) :
+            conf = input("Do you really want to remove this table? (Y/N) : ")
+            if conf == "Y" :
+                self.cursor.execute(f'DROP TABLE {table_name}')
+                self.conn.commit()
+                print(f"Table {table_name} has been removed.")
+            else :
+                print("Operation Aborted.")
+        else : 
+            print("The Table Doesn't Exist")
     
     def close(self) :
         self.conn.close()
@@ -88,7 +100,7 @@ data = {
 
 db.createTable(data)
 # print(db.fetchAll("books"))
-# db.addData(table_name="books",data=['To Kill a Mockingbird', 'Abc', 5])
+db.addData(table_name="books",data=['To Kill a Mockingbird', 'Abc', 12])
 print(db.fetchWhere(table_name="books", data="Book_Name == 'To Kill a Mockingbird'"))
-print(db.getColumns(table_name="books"))
+# print(db.getColumns(table_name="books"))
 db.close()
