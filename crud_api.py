@@ -32,6 +32,14 @@ class dboperation :
 
         self.conn.commit()
 
+    def getColumns(self, table_name):
+        if self.table_exists(table_name=table_name):
+            self.cursor.execute(f'PRAGMA table_info({table_name})')
+            columns_info = self.cursor.fetchall()
+            return columns_info
+        else:
+            print("The Table Doesn't Exist")
+
     def addData(self, table_name, data):
         if self.table_exists(table_name=table_name):
             placeholders = ','.join(['?'] * len(data))
@@ -46,6 +54,18 @@ class dboperation :
     def fetchAll(self, table_name) :
         self.cursor.execute(f'SELECT * FROM {table_name}')
         return self.cursor.fetchall()
+    
+    def fetchWhere(self, table_name, data, fromcols=None) :
+        if self.table_exists(table_name=table_name) :
+            if fromcols is not None: 
+                cols = ','.join(fromcols)
+                self.cursor.execute(f'SELECT {cols} FROM {table_name} WHERE {data}')
+                return self.cursor.fetchall()
+            else :
+                self.cursor.execute(f'SELECT * FROM {table_name} WHERE {data}')
+                return self.cursor.fetchall()
+        else : 
+            print("The Table Doesn't Exist")
     
     def close(self) :
         self.conn.close()
@@ -67,7 +87,8 @@ data = {
 }
 
 db.createTable(data)
-print(db.fetchAll("books"))
+# print(db.fetchAll("books"))
 # db.addData(table_name="books",data=['To Kill a Mockingbird', 'Abc', 5])
-
+print(db.fetchWhere(table_name="books", data="Book_Name == 'To Kill a Mockingbird'"))
+print(db.getColumns(table_name="books"))
 db.close()
