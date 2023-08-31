@@ -2,7 +2,7 @@ import sqlite3
 import os
 
 class dboperation :
-    def __init__(self,name) :
+    def _init_(self,name) :
         self.database_name = name
         self.conn = sqlite3.connect(name+".db")
         self.cursor = self.conn.cursor()
@@ -28,8 +28,23 @@ class dboperation :
             )'''
 
         self.cursor.execute(query)
+        self.create_ml_info_table(table_name=table_name, data=table_data)
 
         print("Created Table")
+
+        self.conn.commit()
+
+    def create_ml_info_table(self, table_name, data) : 
+        ml_table = table_name + '_ml_info'
+        query = f"CREATE TABLE IF NOT EXISTS {ml_table} ( col_name TEXT, col_desc TEXT )"
+        self.cursor.execute(query)
+
+        for col in data['cols']:
+            col_name = col["name"]
+            col_desc = col["desc"]
+            self.addData(ml_table,[col_name,col_desc])
+        
+        print("ML InfoTable Created.")
 
         self.conn.commit()
 
@@ -102,20 +117,24 @@ data = {
     "table_name" : "books",
     "cols" : [{
         "name" : "Book_Name",
-        "datatype" : "TEXT"
+        "datatype" : "TEXT",
+        "desc" : "Names of the Books"
     },{
         "name" : "Author",
-        "datatype" : "TEXT"
+        "datatype" : "TEXT",
+        "desc" : "Authors of the books"
     },{
         "name" : "Copies",
-        "datatype" : "INTEGER"
+        "datatype" : "INTEGER",
+        "desc" : "Copies Made of the books"
     }]
 }
 
-# db.createTable(data)
+db.createTable(data)
 # print(db.fetchAll("books"))
-# db.addData(table_name="books",data=['To Kill a Mockingbird', 'Abc', 12])
+db.addData(table_name="books",data=['To Kill a Mockingbird', 'Abc', 12])
 # print(db.fetchWhere(table_name="books", data="Book_Name == 'To Kill a Mockingbird'"))
 # print(db.getColumns(table_name="books"))
-# db.close()
-db.dropDatabase()
+print(db.fetchAll("books_ml_info"))
+db.close()
+# db.dropDatabase()
