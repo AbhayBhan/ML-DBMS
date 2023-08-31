@@ -2,7 +2,7 @@ import sqlite3
 import os
 
 class dboperation :
-    def _init_(self,name) :
+    def __init__(self,name) :
         self.database_name = name
         self.conn = sqlite3.connect(name+".db")
         self.cursor = self.conn.cursor()
