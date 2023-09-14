@@ -58,10 +58,12 @@ class dboperation :
 
     def addData(self, table_name, data):
         if self.table_exists(table_name=table_name):
-            placeholders = ','.join(['?'] * len(data))
-            query = f'INSERT INTO {table_name} VALUES ({placeholders})'
-            self.cursor.execute(query, data)
-            self.conn.commit()
+            for obj in data:
+                placeholders = ','.join(['?'] * len(obj))
+                query = f'INSERT INTO {table_name} VALUES ({placeholders})'
+                
+                self.cursor.execute(query, obj)
+                self.conn.commit()
             print("Data added successfully")
         else:
             print("The Table Doesn't Exist")
@@ -86,8 +88,9 @@ class dboperation :
     def deleteTable(self, table_name) : 
         if self.table_exists(table_name=table_name) :
             conf = input("Do you really want to remove this table? (Y/N) : ")
-            if conf == "Y" :
+            if conf.lower() == "y" :
                 self.cursor.execute(f'DROP TABLE {table_name}')
+                self.cursor.execute(f'DROP TABLE {table_name}_ml_info')
                 self.conn.commit()
                 print(f"Table {table_name} has been removed.")
             else :
@@ -100,7 +103,7 @@ class dboperation :
         dbname = self.database_name+".db"
         if os.path.exists(dbname) : 
             conf = input("Do you really want to drop this database? (Y/N) : ")
-            if conf == "Y" :
+            if conf.lower() == "y" :
                 os.remove(dbname)
                 print("Dropped Database.")
             else : 
@@ -113,6 +116,8 @@ class dboperation :
 
 
 db = dboperation("books")
+
+
 data = {
     "table_name" : "books",
     "cols" : [{
@@ -130,11 +135,14 @@ data = {
     }]
 }
 
-db.createTable(data)
-# print(db.fetchAll("books"))
-db.addData(table_name="books",data=['To Kill a Mockingbird', 'Abc', 12])
-# print(db.fetchWhere(table_name="books", data="Book_Name == 'To Kill a Mockingbird'"))
-# print(db.getColumns(table_name="books"))
-print(db.fetchAll("books_ml_info"))
-db.close()
-# db.dropDatabase()
+
+if __name__ == "__main__" :
+    pass
+    # db.createTable(data)
+    # print(db.fetchAll("books"))
+    # db.addData(table_name="books",data=['To Kill a Mockingbird', 'Abc', 12])
+    # print(db.fetchWhere(table_name="books", data="Book_Name == 'To Kill a Mockingbird'"))
+    # print(db.getColumns(table_name="books"))
+    # print(db.fetchAll("books_ml_info"))
+    # db.close()
+    # db.dropDatabase()
