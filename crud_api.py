@@ -29,11 +29,12 @@ class dboperation :
             )'''
 
         self.cursor.execute(query)
-        # self.create_ml_info_table(table_name=table_name, data=table_data)
+        self.create_ml_info_table(table_name=table_name, data=table_data)
 
         print("Created Table")
 
         self.conn.commit()
+
 
     def create_ml_info_table(self, table_name, data) : 
         ml_table = table_name + '_ml_info'
@@ -43,7 +44,8 @@ class dboperation :
         for col in data['cols']:
             col_name = col["name"]
             col_desc = col["desc"]
-            self.addData(ml_table,[col_name,col_desc])
+            # self.addData(ml_table,[col_name,col_desc])
+            self.addData_in_info_table(ml_table,[col_name,col_desc])
         
         print("ML InfoTable Created.")
 
@@ -70,16 +72,16 @@ class dboperation :
             print("The Table Doesn't Exist")
 
 
-    # def addData(self, table_name, data):
-    #     if self.table_exists(table_name=table_name):
-    #         placeholders = ','.join(['?'] * len(data))
-    #         query = f'INSERT INTO {table_name} VALUES ({placeholders})'
-    #         self.cursor.execute(query, data)
-    #         self.conn.commit()
-    #         print("Data added successfully")
-    #     else:
-    #         print("The Table Doesn't Exist")
-        
+    def addData_in_info_table(self, table_name, data):
+        if self.table_exists(table_name=table_name):
+            placeholders = ','.join(['?'] * len(data))
+            query = f'INSERT INTO {table_name} VALUES ({placeholders})'
+            self.cursor.execute(query, data)
+            self.conn.commit()
+            print("Data added successfully")
+        else:
+            print("The Table Doesn't Exist")
+    
 
     def fetchAll(self, table_name) :
         self.cursor.execute(f'SELECT * FROM {table_name}')

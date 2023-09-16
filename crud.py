@@ -3,7 +3,7 @@ from crud_api import dboperation
 
 
 def main():
-    print("commond line crud")
+  
 
     db=input("Enter Database Name : ")
     db = dboperation(db)
@@ -33,34 +33,43 @@ def main():
         elif user_input == "2":
             table_name = input("Enter Table Name : ")
             # show table columns here
-            get_cols = db.getColumns(table_name=table_name)
-            print(get_cols ,'Enter columns data')
-            cols = []
-            while True:
-                # col_name = input("Enter Column Name : ")
-                cols_value = []
-                for col_name in get_cols:
-                    print(col_name[1], end=" ")
-                    col_value = input("Value : ")
-                    cols_value.append(col_value)
-    
-                cols.append(cols_value)
-                if input("Do you want to add more data? (Y/N) : ").lower() == "n":
-                    break
-            data = {
-                "table_name" : table_name,
-                "cols" : cols
-            }
+            try:
+                get_cols = db.getColumns(table_name=table_name)
+                print('Enter columns data')
+                cols = []
+                while True:
+                    # col_name = input("Enter Column Name : ")
+                    cols_value = []
+                    for col_name in get_cols:
+                        print(col_name[1], end=" ")
+                        col_value = input("Value : ")
+                        cols_value.append(col_value)
+        
+                    cols.append(cols_value)
+                    if input("Do you want to add more data? (Y/N) : ").lower() == "n":
+                        break
+                data = {
+                    "table_name" : table_name,
+                    "cols" : cols
+                }
 
-            db.addData(data["table_name"], data["cols"])
+                db.addData(data["table_name"], data["cols"])
+            except :
+                print("Table Doesn't Exist")
 
         elif user_input == "3":
             table_name = input("Enter Table Name : ")
-            print(db.getColumns(table_name=table_name))
+            try:
+                print(db.getColumns(table_name=table_name))
+            except :
+                print("Table Doesn't Exist")
 
         elif user_input == "4":
-            table_name = input("Enter Table Name : ")
-            print(db.fetchAll(table_name=table_name))
+            try:
+                table_name = input("Enter Table Name : ")
+                print(db.fetchAll(table_name=table_name))
+            except :
+                print("Table Doesn't Exist")
 
         elif user_input == "5":
             table_name = input("Enter Table Name : ")
