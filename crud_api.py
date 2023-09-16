@@ -1,4 +1,5 @@
 import sqlite3
+import pandas as pd
 import os
 
 class dboperation :
@@ -28,7 +29,7 @@ class dboperation :
             )'''
 
         self.cursor.execute(query)
-        self.create_ml_info_table(table_name=table_name, data=table_data)
+        # self.create_ml_info_table(table_name=table_name, data=table_data)
 
         print("Created Table")
 
@@ -93,6 +94,14 @@ class dboperation :
             else :
                 self.cursor.execute(f'SELECT * FROM {table_name} WHERE {data}')
                 return self.cursor.fetchall()
+        else : 
+            print("The Table Doesn't Exist")
+        
+    def createDFfromall(self, table_name) :
+        if self.table_exists(table_name=table_name) : 
+            query = f"SELECT * FROM {table_name}"
+            df = pd.read_sql_query(query, self.conn)
+            return df
         else : 
             print("The Table Doesn't Exist")
 
