@@ -71,6 +71,11 @@ def main():
         elif user_input == "8":
             break
 
+        elif user_input == "9": # Not for CUI
+            table_name = input("Enter Table Name : ")
+            df = db.createDFfromall(table_name=table_name)
+            print(df)
+
         else:
             print("Invalid Input")
 
