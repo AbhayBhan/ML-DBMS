@@ -67,7 +67,18 @@ class dboperation :
             print("Data added successfully")
         else:
             print("The Table Doesn't Exist")
-            
+
+
+    # def addData(self, table_name, data):
+    #     if self.table_exists(table_name=table_name):
+    #         placeholders = ','.join(['?'] * len(data))
+    #         query = f'INSERT INTO {table_name} VALUES ({placeholders})'
+    #         self.cursor.execute(query, data)
+    #         self.conn.commit()
+    #         print("Data added successfully")
+    #     else:
+    #         print("The Table Doesn't Exist")
+        
 
     def fetchAll(self, table_name) :
         self.cursor.execute(f'SELECT * FROM {table_name}')
@@ -115,25 +126,25 @@ class dboperation :
         self.conn.close()
 
 
-db = dboperation("books")
+# db = dboperation("books")
 
 
-data = {
-    "table_name" : "books",
-    "cols" : [{
-        "name" : "Book_Name",
-        "datatype" : "TEXT",
-        "desc" : "Names of the Books"
-    },{
-        "name" : "Author",
-        "datatype" : "TEXT",
-        "desc" : "Authors of the books"
-    },{
-        "name" : "Copies",
-        "datatype" : "INTEGER",
-        "desc" : "Copies Made of the books"
-    }]
-}
+# data = {
+#     "table_name" : "books",
+#     "cols" : [{
+#         "name" : "Book_Name",
+#         "datatype" : "TEXT",
+#         "desc" : "Names of the Books"
+#     },{
+#         "name" : "Author",
+#         "datatype" : "TEXT",
+#         "desc" : "Authors of the books"
+#     },{
+#         "name" : "Copies",
+#         "datatype" : "INTEGER",
+#         "desc" : "Copies Made of the books"
+#     }]
+# }
 
 
 if __name__ == "__main__" :

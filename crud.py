@@ -1,11 +1,13 @@
-from crud_api import db
+from crud_api import dboperation
 
 
 
 def main():
-    
     print("commond line crud")
 
+    db=input("Enter Database Name : ")
+    db = dboperation(db)
+    
     while True:
         user_input = input("Enter a command \n 1. Create Table \n 2. Add Data \n 3. get Columns \n 4. Fetch All \n 5. Fetch Where \n 6. Delete Table \n 7. Drop Database \n 8. Exit \n")
 
@@ -30,20 +32,26 @@ def main():
             db.createTable(data)
         elif user_input == "2":
             table_name = input("Enter Table Name : ")
+            # show table columns here
+            get_cols = db.getColumns(table_name=table_name)
+            print(get_cols ,'Enter columns data')
             cols = []
             while True:
                 # col_name = input("Enter Column Name : ")
-                col_value = input("Enter Column Value : ")
-                cols.append([
-                    # col_name,
-                    col_value
-                ])
+                cols_value = []
+                for col_name in get_cols:
+                    print(col_name[1], end=" ")
+                    col_value = input("Value : ")
+                    cols_value.append(col_value)
+    
+                cols.append(cols_value)
                 if input("Do you want to add more data? (Y/N) : ").lower() == "n":
                     break
             data = {
                 "table_name" : table_name,
                 "cols" : cols
             }
+
             db.addData(data["table_name"], data["cols"])
 
         elif user_input == "3":
