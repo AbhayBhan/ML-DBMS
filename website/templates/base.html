@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+	{% block title %}{% endblock title %}
+
+	<link rel="icon" type="image/x-icon" href="/static/dashboard/img/favicon.png" />
+
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,500,500i,600,600i,700,700i" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.37.1/apexcharts.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/introjs.min.css" />
+	<link rel="stylesheet" href="/static/dashboard/css/core.css" />
+	<link rel="stylesheet" href="/static/dashboard/css/template.css" />
+	<link rel="stylesheet" href="/static/dashboard/css/theme.css" />
+</head>
+
+<body class="">
+	<div class="layout-wrapper layout-content-navbar">
+		<div class="layout-container">
+			<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+				<div class="app-brand justify-content-center">
+					<a href="/" class="app-brand-link gap-2">
+						<img src="/static/dashboard/img/Logo.png" class="rounded" />
+						<span class="app-brand-text">MLDB</span>
+						<span class="app-brand-slogan">Beta</span>
+					</a>
+				</div>
+
+
+				<hr class="my-2" />
+				<ul class="menu-inner mt-2">
+
+					<li class="menu-item {% if 'home' in request.path %} {{'active'}} {% else %} {{''}} {% endif %}">
+						<a href="/" class="menu-link">
+							<i class="menu-icon bx bx-home-circle"></i> Home
+						</a>
+					</li>
+
+					<li class="menu-header small text-uppercase">Manage</li>
+
+					<li class="menu-item {% if 'backtest' in request.path %} {{'active'}} {% else %} {{''}} {% endif %}">
+						<a href="/database-list" class="menu-link">
+							<i class="menu-icon bx bx-data type=solid"></i> DataBases 
+						</a>
+					</li>
+
+					<!-- <li class="menu-item {% if 'backtest' in request.path %} {{'active'}} {% else %} {{''}} {% endif %}">
+						<a href="/create-database" class="menu-link">
+							<i class="menu-icon bx bx-data"></i> Create Database 
+						</a>
+					</li> -->
+					
+
+					
+		
+				</ul>
+			</aside>
+
+			<div class="layout-page">
+				
+
+				<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+					id="layout-navbar">
+					<div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+						<a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+							<i class="bx bx-menu bx-md"></i>
+						</a>
+					</div>
+
+					<div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+						<ul class="navbar-nav flex-row align-items-center ms-auto">
+
+							<li class="nav-item navbar-dropdown dropdown-user dropdown">
+								<a class="nav-link dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+									<div class="avatar">
+										<img src="/static/dashboard/img/menu.png" alt="Avatar"
+											class="w-px-50 h-auto rounded-circle menu-image" />
+									</div>
+								</a>
+
+								<ul class="dropdown-menu dropdown-menu-end">
+									<li>
+										<a class="dropdown-item" href="">
+											<i class="bx bx-user me-2"></i>
+											<span class="align-middle">Profile</span>
+										</a>
+									</li>
+
+									
+									<li>
+										<a class="dropdown-item" href=""
+											onclick="return confirm('Confirm Logout?');">
+											<i class="bx bx-power-off me-2"></i>
+											<span class="align-middle">Logout</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>
+
+
+
+
+
+				<div class="content-wrapper">
+					<div class="container-xxl flex-grow-1 container-p-y">
+						{% block body %} {% endblock body %}
+					</div>
+
+
+					<div class="content-backdrop fade"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="layout-overlay layout-menu-toggle"></div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.37.1/apexcharts.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.0.1/intro.min.js"></script>
+
+	<script src="/static/dashboard/js/helpers.js"></script>
+	<script src="/static/dashboard/js/menu.js"></script>
+	<script src="/static/dashboard/js/main.js"></script>
+	<script src="/static/dashboard/js/analytics.js"></script>
+
+	<script type="text/javascript">
+		function goBack() {
+			window.history.back();
+		}
+
+		$(document).ready(function () {
+			//introJs().start();
+
+			$(".alert.disappear").delay(3500).hide(100);
+
+			$(".listview_table").DataTable({
+				language: { searchPlaceholder: "Search Records" },
+				columnDefs: [
+					{ orderable: false, targets: [-1] },
+					{ searchable: false, targets: [-1] },
+				],
+			});
+		});
+	</script>
+
+	{% block js_block %}{% endblock js_block %}
+</body>
+
+</html>

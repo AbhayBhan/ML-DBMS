@@ -1,0 +1,206 @@
+/*---------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------    LIGHT TEHEME    -------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+body{
+	background-color: #f5f5f9;
+		background: url("../img/backgrounds/light.png") no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+.modal-content {	
+	background-color: #fff;	
+}
+
+.card{	
+	background-color: #fff;
+}
+
+hr, .card hr {
+	background-color: #d9dee3;
+}
+
+.result_table tbody tr:first-child {	
+	background-color: #ebefff;	
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {	
+	--bs-table-accent-bg: var(--bs-table-striped-bg);	
+}
+
+.dropdown-menu{	
+	box-shadow: 0 0.25rem 1rem rgba(161, 172, 184, 0.45);	
+	background-color: #fff;	
+}
+
+.form-control,
+.dataTables_filter input[type="search"],
+.dataTables_length select{
+	background-color: #fff;
+	border: 1px solid #d9dee3;
+	color: #697a8d;	
+}
+
+.form-control:focus,
+.form-select:focus {
+	background-color: #fff;	
+	border-color: #696cff;	
+	color: #697a8d;	
+	-webkit-text-fill-color: #697a8d;	
+}
+
+.bg-navbar-theme {	
+	background-color: #fff !important;	
+	color: #697a8d;	
+}
+
+.form-control:disabled, .form-control[readonly] {
+	background-color: #eceef1;
+	opacity: 1;
+}
+
+.navbar-detached {	
+	box-shadow: 0 0 0.375rem 0.25rem rgba(161, 172, 184, 0.15);	
+}
+
+.bg-menu-theme {	
+	background-color: #fff !important;	
+	color: #697a8d;	
+}
+
+.bg-menu-theme.menu-vertical {	
+	box-shadow: 0 0.125rem 0.375rem 0 rgba(161, 172, 184, 0.12);	
+}
+
+html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item.open > .menu-link, .layout-menu-hover.layout-menu-collapsed .bg-menu-theme .menu-inner .menu-item.open > .menu-link,
+html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-link:not(.active):hover,
+.layout-menu-hover.layout-menu-collapsed .bg-menu-theme .menu-inner .menu-item .menu-link:not(.active):hover,
+.dropdown-item:hover, .dropdown-item:focus {
+	background-color: #4359711a;
+}
+
+.info_icon{
+	color: #b4bdc6;
+	margin-top: -10px;
+}
+
+.text-muted {
+	color: #a1acb8 !important;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------    DARK TEHEME    -------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------*/
+
+body.darkgrey{
+	background-color: #222b36;
+	background: url("../img/backgrounds/dark.png") no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+body.darkgrey .modal-content {
+	background-color: #1c2530;
+}
+
+body.darkgrey .card {
+	background-color: #1c2530;
+}
+
+body.darkgrey hr,
+body.darkgrey .card hr {
+	background-color: #435971;
+}
+
+body.darkgrey .result_table tbody tr:first-child {
+	background-color: #1c2530;
+}
+
+body.darkgrey .table > :not(caption) > * > * {
+	background-color: #1c2530;
+}
+
+body.darkgrey .table-striped > tbody > tr:nth-of-type(odd) > * {
+	--bs-table-accent-bg: #1c2530;
+}
+
+body.darkgrey .dropdown-menu {
+	box-shadow: none;
+	background-color: #1c2530;
+}
+
+body.darkgrey .form-control,
+body.darkgrey .dataTables_filter input[type="search"],
+body.darkgrey .dataTables_length select {
+	background-color: #1c2530;
+	border: 1px solid #435971;
+	color: #cfdff3;
+	-webkit-text-fill-color: #cfdff3;
+}
+
+body.darkgrey .form-control:focus,
+body.darkgrey .form-select:focus {
+	background-color: #1a2330;
+	border-color: #696cff;
+	color: #cfdff3;
+}
+
+body.darkgrey .form-control:disabled,
+body.darkgrey .form-control[readonly] {
+	background-color: #435971;
+	opacity: 1;
+}
+
+body.darkgrey .bg-navbar-theme {
+	background-color: #1c2530 !important;
+	color: #4e6ea5;
+}
+
+body.darkgrey .navbar-detached {
+	box-shadow: none;
+}
+
+body.darkgrey .bg-menu-theme {
+	background-color: #1c2530 !important;
+	color: #4e6ea5;
+}
+
+body.darkgrey .bg-menu-theme.menu-vertical {
+	box-shadow: none;
+}
+
+@media (min-width: 1200px) {
+	body.darkgrey .navbar-expand-xl .navbar-nav .dropdown-menu {
+		border: 1px solid #435971;
+	}
+}
+
+@media (max-width: 767.98px) {
+	body.darkgrey .layout-navbar .navbar-nav .nav-item.dropdown .dropdown-menu {
+		border: 1px solid #435971;
+	}
+}
+
+body.darkgrey html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item.open > .menu-link,
+body.darkgrey .layout-menu-hover.layout-menu-collapsed .bg-menu-theme .menu-inner .menu-item.open > .menu-link,
+body.darkgrey html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-link:not(.active):hover,
+body.darkgrey .layout-menu-hover.layout-menu-collapsed .bg-menu-theme .menu-inner .menu-item .menu-link:not(.active):hover,
+body.darkgrey .dropdown-item:hover,
+body.darkgrey .dropdown-item:focus {
+	background-color: #43597166;
+}
+
+body.darkgrey .info_icon{
+	color: #435971;
+	margin-top: -10px;
+}
+
+body.darkgrey .text-muted {
+	color: #435971 !important;
+}

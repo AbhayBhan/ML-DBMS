@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+{% block title %} <title>Database Manage | MLDB</title> {% endblock title %}
+{% block body %}
+<ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/"><i class="bx bx-home-circle bx-xs"></i></a></li>
+    <li class="breadcrumb-item active">DataBases</li>
+</ol>
+
+
+<div class="card">
+
+    <div class="card-header">
+        <a onclick="goBack()" class="btn btn-xs btn-outline-secondary rounded-pill" style="float:left;">
+            <i class="bx bx-chevron-left"></i> <span class="d-none d-sm-inline">Back</span>
+        </a>
+
+        <a style="float: right" href="/create-database" class="btn rounded-pill btn-success">
+            <i class="bx bx-plus-circle"></i> &nbsp; Create Database
+        </a>
+    </div>
+
+    <div class="card-body">
+
+        <div class="card">
+            <h5 class="card-header">Striped rows</h5>
+            <div class="table-responsive text-nowrap">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type ?</th>
+                            <th>Length/Values </th>
+                            <th>Default </th>
+                            <th>Attributes</th>
+                            <th>Null</th>
+                            <th>Index</th>
+                            <th>A_I</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <tr>
+                        
+
+                            <td><input type="text" id="coloumnName" name="coloumnName" class="form-control"
+                                    placeholder="Enter Coloumn Name" required>
+                            </td>
+
+                            <td>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Choose Type</option>
+                                    <option value="1">INT</option>
+                                    <option value="2">VARCHAR</option>
+                                    <option value="3">TEXT</option>
+                                    <option value="4">DATE</option>
+                                    <option value="5">DATETIME</option>
+                                    <option value="6">TIMESTAMP</option>
+                                    <option value="7">TIME</option>
+                                    <option value="8">YEAR</option>
+                                    <option value="9">FLOAT</option>
+                                    <option value="10">DOUBLE</option>
+                                    <option value="11">DECIMAL</option>
+                                    <option value="12">ENUM</option>
+                                    <option value="13">SET</option>
+                                    <option value="14">BLOB</option>
+                                    <option value="15">TINYBLOB</option>
+                                    <option value="16">MEDIUMBLOB</option>
+                                    <option value="17">LONGBLOB</option>
+                                    <option value="18">JSON</option>
+                                </select>
+                            </td>
+
+                            <td><input type="text" id="length" name="length" class="form-control"
+                                    placeholder="Enter Length/Values" required>
+                            </td>
+
+                            <td><input type="text" id="default" name="default" class="form-control"
+                                    placeholder="Enter Default Value">
+                            </td>
+
+                            <td>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Choose Attributes</option>
+                                    <option value="1">BINARY</option>
+                                    <option value="2">UNSIGNED</option>
+                                    <option value="3">UNSIGNED ZEROFILL</option>
+                                    <option value="4">ON UPDATE CURRENT_TIMESTAMP</option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Choose Null</option>
+                                    <option value="1">NULL</option>
+                                    <option value="2">NOT NULL</option>
+                                </select>
+                            </td>
+
+                            <td>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Choose Index</option>
+                                    <option value="1">PRIMARY</option>
+                                    <option value="2">UNIQUE</option>
+                                    <option value="3">INDEX</option>
+                                    <option value="4">FULLTEXT</option>
+                                    <option value="5">SPATIAL</option>
+                                </select>
+                            </td>
+                            
+                            <td>
+                                <input  class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </form>
+
+        <div class="col-lg-4 col-md-6">
+            <div class="mt-3">
+                <!-- Modal -->
+                <div class="modal fade" id="basicModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel1">Table Name </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="tablename" class="form-label">Name</label>
+                                        <input type="text" id="tablename" name="tablename" class="form-control"
+                                            placeholder="Enter Table Name" required>
+                                    </div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col mb-0">
+                                        <label for="coloumnNo" class="form-label">No. of Coloumn</label>
+                                        <input type="number" id="coloumnNo" name="coloumnNo" class="form-control"
+                                            placeholder="No. of Coloumn" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                    create-table
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock body %}
+
+
+{% block js_block %}
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+
+    // when open this page, the modal will be opened automatically
+    $(window).on('load', function () {
+        $('#basicModal').modal('show');
+    });
+
+    //  after click  create-table button, then  get the value of table name and coloumn number and close the modal
+    $('#basicModal').on('hidden.bs.modal', function (e) {
+        var tablename = $('#tablename').val();
+        var coloumnNo = $('#coloumnNo').val();
+        console.log(tablename);
+        console.log(coloumnNo);
+
+        // 
+    });
+
+    // get coloumnNo value and create coloumn dynamically 
+
+    $('#coloumnNo').on('change', function () {
+        var coloumnNo = $('#coloumnNo').val();
+        console.log(coloumnNo);
+        var coloumn = '';
+        for (var i = 0; i < coloumnNo; i++) {
+            coloumn += '<tr><td><input type="text" id="coloumnName" name="coloumnName" class="form-control" placeholder="Enter Coloumn Name" required></td><td><select class="form-select" aria-label="Default select example"><option selected>Choose Type</option><option value="1">INT</option><option value="2">VARCHAR</option><option value="3">TEXT</option><option value="4">DATE</option><option value="5">DATETIME</option><option value="6">TIMESTAMP</option><option value="7">TIME</option><option value="8">YEAR</option><option value="9">FLOAT</option><option value="10">DOUBLE</option><option value="11">DECIMAL</option><option value="12">ENUM</option><option value="13">SET</option><option value="14">BLOB</option><option value="15">TINYBLOB</option><option value="16">MEDIUMBLOB</option><option value="17">LONGBLOB</option><option value="18">JSON</option></select></td><td><input type="text" id="length" name="length" class="form-control" placeholder="Enter Length/Values" required></td><td><input type="text" id="default" name="default" class="form-control" placeholder="Enter Default Value"></td><td><select class="form-select" aria-label="Default select example"><option selected>Choose Attributes</option><option value="1">BINARY</option><option value="2">UNSIGNED</option><option value="3">UNSIGNED ZEROFILL</option><option value="4">ON UPDATE CURRENT_TIMESTAMP</option></select></td><td><select class="form-select" aria-label="Default select example"><option selected>Choose Null</option><option value="1">NULL</option><option value="2">NOT NULL</option></select></td><td><select class="form-select" aria-label="Default select example"><option selected>Choose Index</option><option value="1">PRIMARY</option><option value="2">UNIQUE</option><option value="3">INDEX</option><option value="4">FULLTEXT</option><option value="5">SPATIAL</option></select></td><td><input  class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></td></tr>';
+        }
+        $('#coloumn').html(coloumn);
+    });
+
+
+
+
+
+</script>
+
+{% endblock js_block %}

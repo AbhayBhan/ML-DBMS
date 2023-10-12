@@ -5,12 +5,13 @@ import os
 class dboperation :
     def __init__(self,name) :
         self.database_name = name
-        self.conn = sqlite3.connect(name+".db")
+        self.conn = sqlite3.connect('databases/'+name+".db")
         self.cursor = self.conn.cursor()
 
     def table_exists(self, table_name) :
         self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name=?", (table_name,))
         return self.cursor.fetchone() is not None
+    
 
     def createTable(self, table_data) :
         columns = []

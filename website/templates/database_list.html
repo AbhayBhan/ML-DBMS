@@ -1,0 +1,64 @@
+
+{% extends "base.html" %} 
+{% block title %} <title>Database Manage | MLDB</title> {% endblock title %}
+{% block body %}
+<ol class="breadcrumb">
+	<li class="breadcrumb-item"><a href="/"><i class="bx bx-home-circle bx-xs"></i></a></li>
+	<li class="breadcrumb-item active">DataBases</li>
+</ol>
+
+
+<div class="card">
+
+	<div class="card-header">
+		<a onclick="goBack()" class="btn btn-xs btn-outline-secondary rounded-pill" style="float:left;">
+			<i class="bx bx-chevron-left"></i> <span class="d-none d-sm-inline">Back</span>
+		</a>
+
+		<a style="float: right" href="/create-database" class="btn rounded-pill btn-success">
+			<i class="bx bx-plus-circle"></i> &nbsp; Create Database
+		</a>
+	</div>
+
+	<div class="card-body">
+		<div class="table-responsive text-nowrap">
+			<table class="table listview_table text-center">
+				<thead>
+					<tr>
+						<th>Sr No.</th>
+						<th>Database Name</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody class="table-border-bottom-0">
+
+					
+                    {% for dbname in database_list %}
+					<tr>
+						
+                            <td> {{ loop.index }} </td>
+                            <td>{{dbname}}</td>
+                            
+                            <td>							
+                                <a href="/{{dbname}}/table-list" class="btn btn-icon btn-sm btn-info mx-1" data-bs-toggle="tooltip" title="View Tables">
+                                    <i class="bx bx-detail"></i>
+                                </a>
+
+                                <a href="" class="btn btn-icon btn-sm btn-primary mx-1" data-bs-toggle="tooltip" title="Update Database">
+                                    <i class='bx bx-pencil'></i>
+                                </a>
+
+                                <a href="/delete-database/{{dbname}}" class="btn btn-icon btn-sm btn-danger mx-1" data-bs-toggle="tooltip" title="Delete Database" onclick="return confirm('Confirm Coupon Delete?');">
+                                    <i class="bx bx-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %} <title>Coupon Manage | Kuber Admin | Kuber Investments</title> {% endblock title %}
+
+
+{% block body %}
+
+<div class="card mb-4">
+
+	<div class="card-header">
+		<a onclick="goBack()" class="btn btn-xs btn-outline-secondary rounded-pill" style="float:left;">
+			<i class="bx bx-chevron-left"></i> <span class="d-none d-sm-inline">Back</span>
+		</a>
+		<h4 class="text-center">{% if 'create' in request.path %} Create {% else %} Update {% endif %} Database</h4>
+	</div>
+
+	{% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        {% if success %}
+            <div class="alert alert-success" role="alert">
+                {{ success }}
+            </div>
+        {% endif %}
+
+	<div class="card-body">
+		
+		<form method="post" autocomplete="off">
+
+			<div class="row">
+
+				<div class="col-lg-6 col-md-3 mb-3">
+					<label for="dbname">Enter Database name</label>
+					<input type="text" class="form-control" id="dbname" name="dbname" placeholder="Enter Database name" value="{% if 'create' not in request.path %}{{database.dbname}}{% endif %}" required>
+				</div>
+
+				<div class="mt-2">
+
+					<button type="submit" class="btn rounded-pill btn-success me-2" style="float:right;">
+						<i class="bx bxs-check-circle"></i> {% if 'create' in request.path %} Create {% else %} Update {% endif %}
+					</button>
+				</div>
+
+			</div>
+		</form>
+
+	</div>
+</div>
+
+{% endblock body %}
+
+
+{% block js_block %}
+<script type="text/javascript">
+
+	$(document).ready(function() {
+		
+	});
+</script>
+{% endblock js_block %}
